@@ -18,18 +18,18 @@ The Website Checker is a Python script designed to monitor changes on a specifie
 
 ## Setup
 
-```sh
+
 1. Install the required Python libraries:
-
+```sh
 pip install requests schedule twilio
-
+```
 2. Configure Twilio:
     - Sign up for a Twilio account and obtain your account_sid and auth_token.
     - Set up a WhatsApp sender number and obtain the twilio_whatsapp_number.
     - Specify the recipient WhatsApp number in recipient_whatsapp_number.
 
 3. Update the url variable in the script to the website you want to monitor.
-```
+
 ## Usage
 
 Run the script using Python:
