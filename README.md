@@ -18,9 +18,9 @@ The Website Checker is a Python script designed to monitor changes on a specifie
 
 ## Setup
 
+```sh
 1. Install the required Python libraries:
 
-```sh
 pip install requests schedule twilio
 
 2. Configure Twilio:
