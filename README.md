@@ -29,10 +29,11 @@ pip install requests schedule twilio
     - Specify the recipient WhatsApp number in recipient_whatsapp_number.
 
 3. Update the url variable in the script to the website you want to monitor.
-
+```
 ## Usage
 
 Run the script using Python:
 
 ```sh
 python website_checker.py
+```
