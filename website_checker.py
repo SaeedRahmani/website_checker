@@ -4,6 +4,7 @@ import schedule
 import time
 import signal
 from twilio.rest import Client
+from datetime import datetime
 
 # Twilio configuration
 account_sid = '---'
@@ -32,23 +33,26 @@ def check_for_changes(url, previous_hash):
     try:
         html_content = get_page_content(url)
         current_hash = hash_content(html_content)
-        print(f"Current hash: {current_hash}")
-        print(f"Previous hash: {previous_hash}")
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{current_time}] Current hash: {current_hash}")
+        print(f"[{current_time}] Previous hash: {previous_hash}")
 
         if current_hash != previous_hash:
-            print("Content has changed! Sending WhatsApp message...")
+            print(f"[{current_time}] Content has changed! Sending WhatsApp message...")
             send_whatsapp("Website content changed!")
             return current_hash
         else:
-            print("No change detected.")
+            print(f"[{current_time}] No change detected.")
     except Exception as e:
-        print(f"Error checking for changes: {e}")
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{current_time}] Error checking for changes: {e}")
     return previous_hash
 
 def job():
     global previous_hash
     previous_hash = check_for_changes(url, previous_hash)
-    print(f'Updated previous_hash: {previous_hash}')
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{current_time}] Updated previous_hash: {previous_hash}")
 
 def signal_handler(sig, frame):
     print('Exiting gracefully...')
@@ -58,10 +62,11 @@ def signal_handler(sig, frame):
 # Register the signal handler for graceful shutdown
 signal.signal(signal.SIGINT, signal_handler)
 
-url = "https://www.time.ir/"
+url = "https://holland2stay.com/residences?city%5Bfilter%5D=Delft%2C26&page=1"
 html_content = get_page_content(url)
 previous_hash = hash_content(html_content)
-print(f'Initial hash: {previous_hash}')
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+print(f"[{current_time}] Initial hash: {previous_hash}")
 
 schedule.every(1).minute.do(job)
 
